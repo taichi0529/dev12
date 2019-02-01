@@ -26,9 +26,6 @@ class TaskViewController: UIViewController {
             self.noteTextView.text = selectedTask.note
         }
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
-        self.view.addGestureRecognizer(tapRecognizer)
-        
         
     }
     @IBAction func didTouchSaveButton(_ sender: Any) {
@@ -68,9 +65,8 @@ class TaskViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //画面をタップすると、キーボードが閉じる動作
-    @objc func tapGesture(sender: UITapGestureRecognizer) {
-        titleTextField.resignFirstResponder()
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     
