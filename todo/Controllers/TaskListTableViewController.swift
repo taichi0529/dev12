@@ -69,10 +69,13 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
 
     // セルの選択
     override func tableView(_ table: UITableView,didSelectRowAt indexPath: IndexPath) {
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
+        
         let taskViewController = storyboard?.instantiateViewController(withIdentifier: "TaskViewController") as! TaskViewController
         taskViewController.selectedTask = taskCollection.getTask(at: indexPath.row)
         self.navigationController?.pushViewController(taskViewController, animated: true)
+        
         //        performSegue(withIdentifier: "showToTaskViewController", sender: selectedTask)
     }
     

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7VG-YS-3Ey">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7VG-YS-3Ey">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -93,6 +92,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地図" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4E-nH-aaN">
+                                <rect key="frame" x="20" y="286" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MP-fj-hv8">
+                                <rect key="frame" x="0.0" y="312" width="375" height="300"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="bYh-jC-gyV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -100,14 +112,20 @@
                             <constraint firstItem="06N-UH-sa9" firstAttribute="trailing" secondItem="hQb-jz-DAA" secondAttribute="trailing" constant="20" id="1Nf-wb-Nav"/>
                             <constraint firstItem="06N-UH-sa9" firstAttribute="trailing" secondItem="Jd1-Fe-OaD" secondAttribute="trailing" constant="20" id="8qd-qO-0bd"/>
                             <constraint firstItem="Jd1-Fe-OaD" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" constant="20" id="E2x-1e-zfJ"/>
+                            <constraint firstItem="06N-UH-sa9" firstAttribute="trailing" secondItem="N4E-nH-aaN" secondAttribute="trailing" constant="20" id="G9L-tk-Aeb"/>
+                            <constraint firstItem="N4E-nH-aaN" firstAttribute="top" secondItem="hQb-jz-DAA" secondAttribute="bottom" constant="10" id="KMr-6u-PjU"/>
                             <constraint firstItem="Jd1-Fe-OaD" firstAttribute="top" secondItem="06N-UH-sa9" secondAttribute="top" constant="20" id="KaT-78-Rw3"/>
                             <constraint firstItem="no3-Ca-UZM" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" constant="20" id="KgE-AX-1jy"/>
                             <constraint firstItem="KIZ-kY-uUq" firstAttribute="top" secondItem="Jd1-Fe-OaD" secondAttribute="bottom" constant="5" id="Mv0-hh-KEN"/>
                             <constraint firstItem="no3-Ca-UZM" firstAttribute="top" secondItem="KIZ-kY-uUq" secondAttribute="bottom" constant="10" id="Nbh-tw-XbM"/>
                             <constraint firstItem="KIZ-kY-uUq" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" constant="20" id="S8k-rc-riL"/>
+                            <constraint firstItem="7MP-fj-hv8" firstAttribute="top" secondItem="N4E-nH-aaN" secondAttribute="bottom" constant="5" id="UjP-BR-CTK"/>
                             <constraint firstItem="hQb-jz-DAA" firstAttribute="top" secondItem="no3-Ca-UZM" secondAttribute="bottom" constant="5" id="aBw-Wb-r3G"/>
+                            <constraint firstItem="N4E-nH-aaN" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" constant="20" id="c3b-O6-Aba"/>
                             <constraint firstItem="06N-UH-sa9" firstAttribute="trailing" secondItem="no3-Ca-UZM" secondAttribute="trailing" constant="20" id="eGp-W2-3Mg"/>
+                            <constraint firstItem="06N-UH-sa9" firstAttribute="trailing" secondItem="7MP-fj-hv8" secondAttribute="trailing" id="ekQ-Bl-7CR"/>
                             <constraint firstItem="hQb-jz-DAA" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" constant="20" id="phC-ed-qXt"/>
+                            <constraint firstItem="7MP-fj-hv8" firstAttribute="leading" secondItem="06N-UH-sa9" secondAttribute="leading" id="xTu-Ux-4e0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="06N-UH-sa9"/>
                     </view>
@@ -119,6 +137,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapCanvasView" destination="7MP-fj-hv8" id="eq6-ai-M9J"/>
                         <outlet property="noteTextView" destination="Xfr-G5-1YS" id="srI-i6-VXM"/>
                         <outlet property="titleTextField" destination="KIZ-kY-uUq" id="uPO-yv-bjp"/>
                     </connections>
