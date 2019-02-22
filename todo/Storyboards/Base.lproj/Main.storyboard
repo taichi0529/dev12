@@ -33,6 +33,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="pAJ-Qu-XSf">
+                        <barButtonItem key="leftBarButtonItem" title="logout" id="lvB-0y-HcW">
+                            <connections>
+                                <action selector="didTouchLogoutButton:" destination="1h3-rH-AJr" id="hyK-hH-T6P"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UlE-Kv-dQa">
                             <connections>
                                 <action selector="didTouchAddButton:" destination="1h3-rH-AJr" id="TVg-nk-E36"/>
@@ -149,7 +154,7 @@
         <!--Navigation Controller-->
         <scene sceneID="alD-tO-HRR">
             <objects>
-                <navigationController id="7VG-YS-3Ey" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TaskNavigationController" id="7VG-YS-3Ey" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iXp-Zu-2y9">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

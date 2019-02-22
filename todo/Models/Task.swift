@@ -8,6 +8,7 @@
 
 import Foundation
 
+// CodableにすることによりUserDefaultsへエンコード出来るようになっている
 class Task:Codable {
     var title: String = ""
     var note: String = ""

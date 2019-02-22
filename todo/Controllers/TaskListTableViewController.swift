@@ -14,69 +14,63 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         taskCollection.delegate = self
         
     }
     
-    // デリゲート
+    // TaskCollectionDelegateのデリゲート関数。セーブしたら〇〇する。
     func saved() {
         print ("saved")
+        // セーブしたらテーブルを更新している
         self.tableView.reloadData()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-    }
+
     
     @IBAction func didTouchAddButton(_ sender: Any) {
         self.performSegue(withIdentifier: "showToAddViewController", sender: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // ログアウト
+    @IBAction func didTouchLogoutButton(_ sender: Any) {
+        User.shared.logout()
+        //Storyboardを指定
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        //Viewcontrollerを指定
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //rootViewControllerに入れる
+        appDelegate.window?.rootViewController = initialViewController
     }
 
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // セクションの数を返している
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // 行数を返している。行数はタスクの数。
         return taskCollection.taskCount()
     }
 
+    // 〇セクション△行目に描画するセルを作っている
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        print ("Section: " + String(indexPath.section) + " row:" + String(indexPath.row))
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        // Configure the cell...
-        
         cell.textLabel?.text = taskCollection.getTask(at: indexPath.row).title
-
         return cell
     }
 
-    // セルの選択
+    // セルをタップしたら。
     override func tableView(_ table: UITableView,didSelectRowAt indexPath: IndexPath) {
-        
         self.tableView.deselectRow(at: indexPath, animated: true)
-        
         let taskViewController = storyboard?.instantiateViewController(withIdentifier: "TaskViewController") as! TaskViewController
         taskViewController.selectedTask = taskCollection.getTask(at: indexPath.row)
         self.navigationController?.pushViewController(taskViewController, animated: true)
-        
-        //        performSegue(withIdentifier: "showToTaskViewController", sender: selectedTask)
     }
     
     // スワイプで削除

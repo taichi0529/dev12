@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Delegate セーブしたら〇〇するの〇〇の部分を他のクラスに任せる（delegate:委譲）
 protocol TaskCollectionDelegate:class {
     func saved()
 }
