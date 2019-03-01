@@ -11,7 +11,7 @@ import GoogleMaps
 
 class TaskViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
-    let taskCollection = TaskCollection.shared
+    let taskService = TaskService.shared
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextView: UITextView!
@@ -112,14 +112,14 @@ class TaskViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
             selectedTask.note = noteTextView.text
             selectedTask.latitude = coordinate.latitude
             selectedTask.longitude = coordinate.longitude
-            taskCollection.editTask()
+            taskService.editTask()
         } else {
             let task = Task()
             task.title = title
             task.note = noteTextView.text
             task.latitude = coordinate.latitude
             task.longitude = coordinate.longitude
-            taskCollection.addTask(task)
+            taskService.addTask(task)
         }
         
         self.navigationController?.popViewController(animated: true)
@@ -155,6 +155,6 @@ class TaskViewController: UIViewController, CLLocationManagerDelegate, GMSMapVie
     }
     */
     deinit {
-        print ("削除されたよ")
+        print ("TaskViewControllerが削除されたよ")
     }
 }

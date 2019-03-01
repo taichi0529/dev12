@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import PKHUD
 
-class TaskListTableViewController: UITableViewController, TaskCollectionDelegate {
+class TaskListTableViewController: UITableViewController, TaskServiceDelegate {
     
-    let taskCollection = TaskCollection.shared
+    let taskService = TaskService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,15 +19,23 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        taskCollection.delegate = self
+        taskService.delegate = self
         
+        // くるくるまわるやつ。UIActivityIndicatorViewってのがデフォルトであるけれど見た目も使い勝手もイマイチなので。
+        HUD.show(.progress)
+        taskService.load()
     }
     
-    // TaskCollectionDelegateのデリゲート関数。セーブしたら〇〇する。
+    // TaskServiceDelegateのデリゲート関数。セーブしたら〇〇する。
     func saved() {
         print ("saved")
         // セーブしたらテーブルを更新している
         self.tableView.reloadData()
+    }
+    
+    func loaded() {
+        self.tableView.reloadData()
+        HUD.hide()
     }
 
     
@@ -37,6 +46,7 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
     // ログアウト
     @IBAction func didTouchLogoutButton(_ sender: Any) {
         User.shared.logout()
+        taskService.clear()
         //Storyboardを指定
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         //Viewcontrollerを指定
@@ -55,13 +65,13 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 行数を返している。行数はタスクの数。
-        return taskCollection.taskCount()
+        return taskService.taskCount()
     }
 
     // 〇セクション△行目に描画するセルを作っている
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = taskCollection.getTask(at: indexPath.row).title
+        cell.textLabel?.text = taskService.getTask(at: indexPath.row).title
         return cell
     }
 
@@ -69,13 +79,13 @@ class TaskListTableViewController: UITableViewController, TaskCollectionDelegate
     override func tableView(_ table: UITableView,didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         let taskViewController = storyboard?.instantiateViewController(withIdentifier: "TaskViewController") as! TaskViewController
-        taskViewController.selectedTask = taskCollection.getTask(at: indexPath.row)
+        taskViewController.selectedTask = taskService.getTask(at: indexPath.row)
         self.navigationController?.pushViewController(taskViewController, animated: true)
     }
     
     // スワイプで削除
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        taskCollection.removeTask(at: indexPath.row)
+        taskService.removeTask(at: indexPath.row)
     }
 
 }
